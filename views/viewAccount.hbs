@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+</br>
+{{#if msg}}
+<div class="alert alert-success alert-dismissible">
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{msg}}</strong>
+</div>
+{{/if}}
+
+</br>
+            <div class="jumbotron container" style="width: 3000px;">
+                    <center><h2>Customer Account List</h2></center></br>
+                    <table class='table table-hover'>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Domain Name</th>
+                        <th>Plan Taken</th>
+                        <th>Domain Taken from US</th>
+                        <th>Registration Date</th>
+                        <th>Time Period</th>
+                        <th>Plan Expiry Date</th>
+                        <th>Total Hosting Charges</th>
+                        <th>Domain Charges</th>
+                        <th>Total Charges</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                      {{#each data}}
+                      <tr>
+                        <td>{{this.cname}}</td>
+                        <td>{{this.dname}} </td>
+                        <td>{{this.pname}} </td>
+                        <td>{{this.domainTaken}}</td>
+                        <td>{{this.registrationDate}} </td>
+                        <td>{{this.timePeriod}} </td>
+                        <td>{{this.expiryDate}}</td>
+                        <td>{{this.hostCharge}} </td>
+                        <td>{{this.domainCharge}} </td>
+                        <td>{{this.totalCharge}} </td>
+                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+                      </tr>
+                      {{/each}}
+                    </table>
+<a href="adminhome" class="btn btn-info" role="button">Admin Home</a>
+                  </div>
+
+</body>
+</html>

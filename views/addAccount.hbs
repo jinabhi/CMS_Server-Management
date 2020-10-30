@@ -1,0 +1,159 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+  </style>
+
+  <script>
+
+  function displayDCharge(radio){
+    if (radio.value == 'Yes'){
+      document.getElementById("dchr").style.display = "block";
+    }
+    else if (radio.value == 'No'){
+      document.getElementById("dchr").style.display = "none";
+    }
+    var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var registrationDate = yyyy + '/' + mm + '/' + dd;
+  document.getElementById("regdt").value = registrationDate;
+  }
+
+  function calcHCharge(){
+    var pl = document.getElementById("plnm");
+    var ye = document.getElementById("pldur");
+    var ch = parseInt(pl.value);
+    var ya = parseInt(ye.value);
+    var totalHostingCharges = ch * ya;
+    document.getElementById("hchar").value = totalHostingCharges;
+    var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var dateOfexpiry = yyyy + ya + '/' + mm + '/' + dd;
+  document.getElementById("expdt").value = dateOfexpiry;
+  }
+
+  function calcTotalCharge(){
+    var hc = document.getElementById("hchar")
+    var dc = document.getElementById("dchar")
+    var hostingCharge = parseInt(hc.value);
+    var domainCharge = parseInt(dc.value);
+    var totalCharge = hostingCharge + domainCharge;
+    document.getElementById("tchar").value = totalCharge;
+  }
+
+  </script>
+
+</head>
+
+<body>
+<center>
+    <h2>Add New Customer Account</h2>
+    <div class="container">
+      {{#if msg}}
+      <div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert"
+          aria-label="close">&times;</a> <strong>{{msg}}</strong> </div>
+      {{/if}}
+      <div class="jumbotron">
+          <form class="form-horizontal" action="addAcc" method="POST" >
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="fn">Customer Name:</label>
+              <div class="col-sm-5">
+                <select id="cstNm" name="custName" class="form-control" required>
+                  <option></option>
+                  {{#each customername}}
+                  <option>{{this.cname}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="ln">Domain Name:</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="dnm" name="dname" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="email">Plan:</label>
+              <div class="col-sm-5">
+                <select id="plnm" name="plcName" class="form-control" onchange="calcHCharge()" required>
+                  <option></option>
+                  {{#each plans}}
+                  <option value="{{this.pcharges}}">{{this.pname}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="ln">Domain Taken:</label>
+              <div class="col-sm-5">
+                <input type="radio" name="domainTaken" id="yes" value="Yes" onchange="displayDCharge(this)" required> YES
+                <input type="radio" name="domainTaken" id="no" value="No" onchange="displayDCharge(this)"> NO
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="ln">Register Date:</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="regdt" name="regdate" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Time Period:</label>
+              <div class="col-sm-5">
+                <select id="pldur" name="plduration" class="form-control" required="" onchange="calcHCharge()">
+                  <option></option>
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Years</option>
+                  <option value="3">3 Years</option>
+                  <option value="4">4 Years</option>
+                  <option value="5">5 Years</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Expiry Date:</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="expdt" name="expdate" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Hosting Charges: ₹</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="hchar" name="hcharges" onkeydown="calcTotalCharge()" readonly>
+              </div>
+            </div>
+            <div class="form-group" id="dchr" style="display: none;">
+              <label class="control-label col-sm-3" for="ln">Domain Charges: ₹</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="dchar" name="dcharges" value ="0" onkeydown="calcTotalCharge()">
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="control-label col-sm-3">Total Charges: ₹</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="tchar" name="tcharges" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-5">
+                <input type="submit" value="Add Customer Account" class="btn btn-info">
+                <a href="adminhome" class="btn btn-info col-sm-offset-4" role="button">Back</a>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+</center>
+</body>
+
+</html>

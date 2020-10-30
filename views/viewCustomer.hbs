@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+</br>
+{{#if msg}}
+<div class="alert alert-success alert-dismissible">
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{msg}}</strong>
+</div>
+{{/if}}
+
+</br>
+            <div class="jumbotron container" style="width: 800px;">
+                    <center><h2>Customer List</h2></center></br>
+                    <table class='table table-hover'>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Mobile Number</th>
+                        <th>Email</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                      {{#each data}}
+                      <tr>
+                        <td>{{this.cname}}</td>
+                        <td>{{this.mobilenumber}} </td>
+                        <td>{{this.emailid}} </td>
+                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+                      </tr>
+                      {{/each}}
+                    </table>
+<a href="adminhome" class="btn btn-info" role="button">Admin Home</a>
+                  </div>
+
+</body>
+</html>

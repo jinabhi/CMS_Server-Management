@@ -1,0 +1,164 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Lato", sans-serif;
+    }
+
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 300px;
+      overflow: auto;
+    }
+
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    .sidebar a.active {
+      background-color: rgb(0, 0, 0);
+      color: white;
+    }
+
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+
+    div.content {
+      margin-left: 200px;
+      padding: 1px 16px;
+      height: 100%;
+    }
+
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .sidebar a {
+        float: left;
+      }
+
+      div.content {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
+  </style>
+  <script>
+
+    function closeProfile() {
+      document.getElementById("viewProf").style.display = "none";
+      document.getElementById("changePassword").style.display = "block";
+    }
+
+    function closeChangePwd() {
+      document.getElementById("changePassword").style.display = "none";
+      document.getElementById("viewProf").style.display = "block";
+    }
+</script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <a href="#" onclick="closeChangePwd()">Profile</a>
+    <a href="custSelfAcc">View My Accounts</a>
+    <a href="#" onclick="closeProfile();">Change Password</a>
+  </div>
+
+  <div class="content">
+    <h2 style="text-align: center">Welcome {{this.uname}}</h2>
+    <div class="container">
+      {{#if msg}}
+      <div class="alert alert-success alert-dismissible" style="width: 700px;"><a href="#" class="close" data-dismiss="alert"
+          aria-label="close">&times;</a> <strong>{{msg}}</strong> </div>
+      {{/if}}
+      <div class="jumbotron" style="width: 700px;">
+
+
+        {{!-- Change Password Form --}}
+
+        <div id="changePassword" style="display: none">
+          <h3>Change Password</h3>
+          <form class="form-horizontal" action="changePass" method="POST">
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Current Password:</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter Current password" name="oldPwd">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">New Password:</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter New password" name="newPwd">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Change Password</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" onclick="closeChangePwd()">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        {{!-- View Profile --}}
+
+        <div id="viewProf">
+          <h3>View Profile</h3>
+          {{#each data}}
+          <table class='table table-hover'>
+            <tr>
+              <th>NAME :</th>
+              <td>{{this.cname}}</td>
+            </tr>
+            <tr>
+              <th>MOBILE NUMBER :</th>
+              <td>{{this.mobilenumber}} </td>
+            </tr>
+            <tr>
+              <th>EMAIL :</th>
+              <td>{{this.emailid}}</td>
+            </tr>
+          </table>
+          {{/each}}
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

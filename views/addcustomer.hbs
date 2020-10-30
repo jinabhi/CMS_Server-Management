@@ -1,0 +1,53 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<center>
+    <h2>Add New Customer</h2>
+    <div class="container">
+      {{#if msg}}
+      <div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert"
+          aria-label="close">&times;</a> <strong>{{msg}}</strong> </div>
+      {{/if}}
+      <div class="jumbotron">
+          <form class="form-horizontal" action="addCust" method="POST" >
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="fn">Customer Name:</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="fname" name="custname">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="ln">Mobile Number:</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="mob" name="mnum">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="email">Email:</label>
+              <div class="col-sm-5">
+                <input type="email" class="form-control" id="email" name="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-5">
+                <input type="submit" value="Add Customer" class="btn btn-info">
+                <a href="adminhome" class="btn btn-info col-sm-offset-4" role="button">Back</a>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+</center>
+</body>
+
+</html>

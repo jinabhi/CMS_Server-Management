@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #393b40;
+  padding: 10px;
+}
+.grid-item {
+  background-color: #706c68;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+<script>
+    function openAddPlan() {
+      document.getElementById("addPlan").style.display = "block";
+    }
+
+    function closeAddPlan() {
+      document.getElementById("addPlan").style.display = "none";
+      document.getElementById("pln").value = "";
+      document.getElementById("chr").value = "";
+    }
+
+    function openViewPlan() {
+      document.getElementById("viewPlan").style.display = "block";
+    }
+
+    function closeViewPlan() {
+      document.getElementById("viewPlan").style.display = "none";
+    }
+
+</script>
+</head>
+<body>
+</br>
+{{#if msg}}
+<div class="alert alert-success alert-dismissible">
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{msg}}</strong>
+</div>
+{{/if}}
+<div class="grid-container">
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="addcustomer">Add New Customer</a></div>
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="#" onclick="openAddPlan();closeViewPlan();">Add Plans</a></div>
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="addAcc">Add New Account</a></div>
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="viewcustomer">View All Customer</a></div>
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="#" onclick="openViewPlan();closeAddPlan();">View All Plans</a></div>
+  <div class="grid-item"><a class="nav-link" style="color:white;" href="viewAccount">View All Account</a></div>
+</div>
+</br>
+<div id="addPlan" style="display: none;">
+  <div class="jumbotron container" style="width: 800px;">
+          <center><h3> Add Hosting Plan </h3></center></br></br>
+          <form class="form-horizontal" action="addHPlan" method="POST">
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">Plan Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="pln" name="plname" required="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Charges: </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" placeholder="₹" id="chr" name="charges" required="">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info">Add Plan</button>
+                <button type="button" class="btn btn-info" onclick="closeAddPlan()">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+          <div id="viewPlan" style="display: none;">
+            <div class="jumbotron container" style="width: 800px;">
+                    <center><h3>View Plans</h3></center></br>
+                    <table class='table table-hover'>
+                      <tr>
+                        <th>Plan Name :</th>
+                        <th>Charges (₹):</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                      {{#each data}}
+                      <tr>
+                        <td>{{this.pname}}</td>
+                        <td>{{this.pcharges}} </td>
+                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+                      </tr>
+                      {{/each}}
+                    </table>
+<button type="button" class="btn btn-info" onclick="closeViewPlan()">Close</button>
+                  </div>
+</div>
+</body>
+</html>

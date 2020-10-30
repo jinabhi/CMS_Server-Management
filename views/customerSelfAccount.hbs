@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+</br>
+<center><h2>{{this.uname}}'s Accounts List </h2></center>
+
+</br>
+            <div class="jumbotron container">
+                    <table class='table table-hover'>
+                      <tr>
+                        <th>Domain Name</th>
+                        <th>Plan Taken</th>
+                        <th>Registration Date</th>
+                        <th>Time Period</th>
+                        <th>Plan Expiry Date</th>
+                        <th>Total Hosting Charges</th>
+                        <th>Domain Charges</th>
+                        <th>Total Charges</th>
+                      </tr>
+                      {{#each data}}
+                      <tr>
+                        <td>{{this.dname}} </td>
+                        <td>{{this.pname}} </td>
+                        <td>{{this.registrationDate}} </td>
+                        <td>{{this.timePeriod}} </td>
+                        <td>{{this.expiryDate}}</td>
+                        <td>{{this.hostCharge}} </td>
+                        <td>{{this.domainCharge}} </td>
+                        <td>{{this.totalCharge}} </td>
+                        </tr>
+                      {{/each}}
+                    </table>
+<a href="customerHome" class="btn btn-info" role="button">Back</a>
+                  </div>
+
+</body>
+</html>
